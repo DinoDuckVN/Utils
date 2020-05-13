@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace DinoVNOwO\Utils;
 
-use pocketmine\level\Position;
+use pocketmine\math\Vector3;
 use pocketmine\network\mcpe\protocol\PlaySoundPacket;
 use pocketmine\network\mcpe\protocol\SpawnParticleEffectPacket;
 use pocketmine\plugin\PluginBase;
@@ -21,7 +21,7 @@ class Main extends PluginBase{
 		return self::$instance;
 	}
 	
-	public function sound(Position $pos, string $soundname, int $volume = 1, int $pitch = 1, array $players) : bool{
+	public function sound(Vector3 $pos, string $soundname, int $volume = 1, int $pitch = 1, array $players) : bool{
 		$pk = new PlaySoundPacket();
 		$pk->soundName = $soundname;
 		$pk->x = $pos->x;
@@ -33,7 +33,7 @@ class Main extends PluginBase{
 		return true;
 	}
 
-	public function particle(Position $pos, string $particlename, array $players) : bool{
+	public function particle(Vector3 $pos, string $particlename, array $players) : bool{
 		$pk = new SpawnParticleEffectPacket();
 		$pk->position = $pos->asVector3();
 		$pk->particleName = $particlename;
