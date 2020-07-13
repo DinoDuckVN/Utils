@@ -6,6 +6,8 @@ Utils for PocketMine-MP
 
 >particle(Vector3, string (particlename), array (players))
 
+>convertToSkin(string (skinpath), string(geometryname), string(geometrypath)) : Skin
+
 #Sound/Particles list
 
 https://minecraft.gamepedia.com/Sounds.json/Bedrock_Edition_values
