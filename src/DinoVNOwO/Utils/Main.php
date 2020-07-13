@@ -46,4 +46,22 @@ class Main extends PluginBase{
 		$this->getServer()->broadcastPacket($players, $pk);
 		return true;
 	}
+	
+	
+
+	public function convertToSkin(string $skinpath, string $geometryname, string $geometrypath) : Skin{
+		$imagesize = getimagesize($skinpath);
+		$width = $imagesize[0];
+		$height = $imagesize[1];
+		$img = imagecreatefrompng($skinpath);
+		$bytes = "";
+		for ($y = 0; $y < $height; ++$y) {
+			for ($x = 0; $x < $width; ++$x) {
+				$argb = imagecolorat($img, $x, $y);
+				$bytes .= chr(($argb >> 16) & 0xff) . chr(($argb >> 8) & 0xff) . chr($argb & 0xff) . chr((~($argb >> 24) << 1) & 0xff);
+			}	
+		}
+		imagedestroy($img);
+		return new Skin("Standard_Custom", $bytes, $geometryname, file_get_contents($geometrypath));
+	}
 }
