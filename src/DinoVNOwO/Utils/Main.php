@@ -46,10 +46,8 @@ class Main extends PluginBase{
 		$this->getServer()->broadcastPacket($players, $pk);
 		return true;
 	}
-	
-	
 
-	public function convertToSkin(string $skinpath, string $geometryname, string $geometrypath) : Skin{
+	public function convertToByte(string $skinpath) : string{
 		$imagesize = getimagesize($skinpath);
 		$width = $imagesize[0];
 		$height = $imagesize[1];
@@ -62,6 +60,10 @@ class Main extends PluginBase{
 			}	
 		}
 		imagedestroy($img);
-		return new Skin("Standard_Custom", $bytes, $geometryname, file_get_contents($geometrypath));
+		return $bytes;
+	}
+
+	public function convertToSkin(string $skinpath, string $geometryname, string $geometrypath) : Skin{
+		return new Skin("Standard_Custom", $this->convertToByte($skinpath), $geometryname, file_get_contents($geometrypath));		
 	}
 }
