@@ -47,11 +47,11 @@ class Main extends PluginBase{
 		return true;
 	}
 
-	public function convertToByte(string $skinpath) : string{
-		$imagesize = getimagesize($skinpath);
+	public function convertToByte(string $path) : string{
+		$imagesize = getimagesize($path);
 		$width = $imagesize[0];
 		$height = $imagesize[1];
-		$img = imagecreatefrompng($skinpath);
+		$img = imagecreatefrompng($path);
 		$bytes = "";
 		for ($y = 0; $y < $height; ++$y) {
 			for ($x = 0; $x < $width; ++$x) {
@@ -63,7 +63,26 @@ class Main extends PluginBase{
 		return $bytes;
 	}
 
-	public function convertToSkin(string $skinpath, string $geometryname, string $geometrypath) : Skin{
-		return new Skin("Standard_Custom", $this->convertToByte($skinpath), $geometryname, file_get_contents($geometrypath));		
+	public function convertToSkin(string $path, string $geometryname, string $geometrypath) : Skin{
+		return new Skin("Standard_Custom", $this->convertToByte($path), $geometryname, file_get_contents($geometrypath));		
+	}
+	
+	public function imageResize(string $path, int $width, int $height){
+		$imagesize = getimagesize($path);
+		$imagewidth = $imagesize[0];
+		$imageheight = $imagesize[1];
+
+		$imager = $imagewidth / $imageheight;
+
+		if($width / $height > $imager) {
+			$newimagewidth = $height * $imager;
+			$newimageheight = $height;
+        	}else{
+            		$newimageheight = $width / $imager;
+            		$newimagewidth = $width;
+		}
+		$dst = imagecreatetruecolor($newimagewidth, $newimageheight);
+		imagecopyresampled(imagecreatetruecolor($newimagewidth, $newimageheight), imagecreatefrompng($path), 0, 0, 0, 0, $newimageheight, $newimageheight, $width, $height);
+		return $dst;
 	}
 }
