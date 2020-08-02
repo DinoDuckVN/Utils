@@ -37,7 +37,7 @@ class Main extends PluginBase{
 		return true;
 	}
 	
-	public function particle(string $particlename, Vector3 $pos, int $xoffset = 0, int $yoffset = 0, int $zoffset = 0, array $players = []) : bool{
+	public function particle(string $particlename, Vector3 $pos, float $xoffset = 0.0, float $yoffset = 0.0, float $zoffset = 0.0, array $players = []) : bool{
 		if($players === []){
 			$players = $this->getServer()->getOnlinePlayers();
 		}
