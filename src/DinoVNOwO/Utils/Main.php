@@ -35,13 +35,23 @@ class Main extends PluginBase{
 		$this->getServer()->broadcastPacket($players, $pk);
 		return true;
 	}
-
-	public function particle(Vector3 $pos, string $particlename, array $players = []) : bool{
+	
+	public function particle(string $particlename, Vector3 $pos, int $xoffset = 0, int $yoffset = 0, int $zoffset = 0, array $players = []) : bool{
 		if($players === []){
 			$players = $this->getServer()->getOnlinePlayers();
 		}
 		$pk = new SpawnParticleEffectPacket();
-		$pk->position = $pos->asVector3();
+		$random = new Random((int) (microtime(true) * 1000) + mt_rand());
+		if($xoffset !== 0){
+			$pos->add($random->nextSignedFloat() * $xoffset);
+		}
+		if($yoffset !== 0){
+			$pos->add(0, $random->nextSignedFloat() * $yoffset);
+		}
+		if($zoffset !== 0){
+			$pos->add(0, 0, $random->nextSignedFloat() * $zoffset);
+		}
+		$pk->position = $pos;
 		$pk->particleName = $particlename;
 		$this->getServer()->broadcastPacket($players, $pk);
 		return true;
