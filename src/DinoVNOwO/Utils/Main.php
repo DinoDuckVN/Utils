@@ -9,6 +9,7 @@ use pocketmine\entity\Skin;
 use pocketmine\network\mcpe\protocol\PlaySoundPacket;
 use pocketmine\network\mcpe\protocol\SpawnParticleEffectPacket;
 use pocketmine\plugin\PluginBase;
+use pocketmine\utils\Random;
 
 class Main extends PluginBase{
 	
