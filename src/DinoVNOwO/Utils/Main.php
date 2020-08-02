@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace DinoVNOwO\Utils;
 
 use pocketmine\math\Vector3;
+use pocketmine\entity\Skin;
 use pocketmine\network\mcpe\protocol\PlaySoundPacket;
 use pocketmine\network\mcpe\protocol\SpawnParticleEffectPacket;
 use pocketmine\plugin\PluginBase;
