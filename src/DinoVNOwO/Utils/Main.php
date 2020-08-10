@@ -76,7 +76,7 @@ class Main extends PluginBase{
 	}
 
 	public function convertToSkin(string $path, string $geometryname, string $geometrypath) : Skin{
-		return new Skin("Standard_Custom", $this->convertToByte($path), $geometryname, file_get_contents($geometrypath));		
+		return new Skin("Standard_Custom", $this->convertToByte($path), "", $geometryname, file_get_contents($geometrypath));		
 	}
 	
 	public function imageResize(string $path, int $width, int $height){
