@@ -1,7 +1,0 @@
----
-name: Utils
-version: 0.0.1
-main: DinoVNOwO\Utils\Main
-api: 3.12.0
-load: STARTUP
-...
